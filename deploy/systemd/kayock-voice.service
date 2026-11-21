@@ -1,0 +1,15 @@
+[Unit]
+Description=Kayock Voice - Kokoro TTS Web
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=kayock
+WorkingDirectory=/opt/kayock-voice/kokoro
+ExecStart=/opt/kayock-voice/kokoro/.venv/bin/uvicorn server:app --host 0.0.0.0 --port 8766 --ssl-keyfile /opt/kayock-voice/kokoro/kayock-voice.key --ssl-certfile /opt/kayock-voice/kokoro/kayock-voice.crt
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

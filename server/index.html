@@ -1,0 +1,756 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kayock Voice</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    background: #111318;
+    color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    padding: 28px 16px;
+}
+
+.app {
+    width: 100%;
+    max-width: 850px;
+}
+
+h1 {
+    margin: 0;
+    font-size: clamp(2rem, 6vw, 3.3rem);
+}
+
+.sub {
+    color: #aaa;
+    margin: 6px 0 24px;
+}
+
+.card {
+    background: #1b1e25;
+    border: 1px solid #30343d;
+    border-radius: 18px;
+    padding: 20px;
+}
+
+textarea {
+    width: 100%;
+    min-height: 260px;
+    resize: vertical;
+    border-radius: 14px;
+    border: 1px solid #3c414d;
+    background: #101216;
+    color: white;
+    padding: 16px;
+    font: inherit;
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+.meta {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 6px;
+    color: #777;
+    font-size: .85rem;
+}
+
+.settings {
+    display: grid;
+    grid-template-columns: minmax(160px, 1fr) minmax(220px, 2fr);
+    gap: 14px;
+    margin-top: 16px;
+}
+
+.setting {
+    background: #15181e;
+    border: 1px solid #30343d;
+    border-radius: 12px;
+    padding: 12px;
+}
+
+.setting label {
+    display: block;
+    color: #aaa;
+    font-size: .85rem;
+    margin-bottom: 7px;
+}
+
+select {
+    width: 100%;
+    border: 1px solid #3c414d;
+    border-radius: 10px;
+    padding: 10px 12px;
+    background: #101216;
+    color: white;
+    font: inherit;
+}
+
+.speed-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+input[type="range"] {
+    width: 100%;
+}
+
+#speedValue,
+.pause-value {
+    min-width: 48px;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+.pause-line {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.pause-line span.lbl {
+    width: 72px;
+    color: #aaa;
+    font-size: .85rem;
+}
+
+.setting.is-off {
+    opacity: .45;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 16px;
+}
+
+button {
+    border: 0;
+    border-radius: 12px;
+    padding: 13px 20px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+button:disabled {
+    opacity: .45;
+    cursor: default;
+}
+
+#speak {
+    background: #f3f3f3;
+    color: #111;
+}
+
+#stop,
+#clear,
+#save {
+    background: #343943;
+    color: white;
+}
+
+.status {
+    margin-left: auto;
+    color: #aaa;
+    font-size: .95rem;
+}
+
+audio {
+    width: 100%;
+    margin-top: 18px;
+}
+
+.hint {
+    margin-top: 10px;
+    color: #666;
+    font-size: .82rem;
+}
+
+@media (max-width: 650px) {
+    .settings {
+        grid-template-columns: 1fr;
+    }
+
+    .status {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    button {
+        flex: 1;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <h1>Kayock Voice</h1>
+
+    <div class="sub">
+        Local Kokoro Text-to-Speech
+    </div>
+
+    <div class="card">
+
+        <textarea
+            id="text"
+            placeholder="Type what you want Kayock Voice to say..."
+        ></textarea>
+
+        <div class="meta">
+            <span id="charCount">0 characters</span>
+        </div>
+
+        <div class="settings">
+
+            <div class="setting">
+                <label for="voice">Voice</label>
+
+                <select id="voice">
+                    <option
+                        value="father_fox"
+                        data-code="am_adam"
+                    >Adam</option>
+
+                    <option
+                        value="eve"
+                        data-code="af_heart"
+                    >Eve</option>
+
+                    <option
+                        value="fenrir"
+                        data-code="am_fenrir"
+                    >Fenrir</option>
+
+                    <option
+                        value="onyx"
+                        data-code="am_onyx"
+                    >Onyx</option>
+
+                    <option
+                        value="fable"
+                        data-code="bm_fable"
+                    >Fable</option>
+
+                    <option
+                        value="daniel"
+                        data-code="bm_daniel"
+                    >Daniel</option>
+
+                    <option
+                        value="george"
+                        data-code="bm_george"
+                    >George</option>
+                </select>
+            </div>
+
+            <div class="setting">
+                <label for="speed">
+                    Speed
+                </label>
+
+                <div class="speed-row">
+
+                    <input
+                        id="speed"
+                        type="range"
+                        min="0.50"
+                        max="2.00"
+                        step="0.01"
+                        value="0.92"
+                    >
+
+                    <span id="speedValue">
+                        0.92×
+                    </span>
+
+                </div>
+            </div>
+
+            <div class="setting" id="langSetting">
+                <label for="lang">Language</label>
+                <select id="lang">
+                    <option value="">Auto</option>
+                    <option value="en-us">English (US)</option>
+                    <option value="en-gb">English (UK)</option>
+                    <option value="es">Spanish</option>
+                    <option value="fr-fr">French</option>
+                    <option value="hi">Hindi</option>
+                    <option value="it">Italian</option>
+                    <option value="ja">Japanese</option>
+                    <option value="pt-br">Portuguese</option>
+                    <option value="cmn">Mandarin</option>
+                </select>
+            </div>
+
+            <div class="setting" id="pauseSetting">
+                <label>Pauses</label>
+                <div class="pause-line">
+                    <span class="lbl">Sentence</span>
+                    <input
+                        id="sentencePause"
+                        type="range"
+                        min="0"
+                        max="2"
+                        step="0.05"
+                        value="0.25"
+                    >
+                    <span class="pause-value" id="sentencePauseValue">0.25s</span>
+                </div>
+                <div class="pause-line">
+                    <span class="lbl">Clause</span>
+                    <input
+                        id="clausePause"
+                        type="range"
+                        min="0"
+                        max="2"
+                        step="0.05"
+                        value="0.10"
+                    >
+                    <span class="pause-value" id="clausePauseValue">0.10s</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="controls">
+
+            <button id="speak">
+                ▶ Speak
+            </button>
+
+            <button id="stop">
+                ■ Stop
+            </button>
+
+            <button id="save" disabled>
+                💾 Save WAV
+            </button>
+
+            <button id="clear">
+                Clear
+            </button>
+
+            <span
+                class="status"
+                id="status"
+            >Ready</span>
+
+        </div>
+
+        <audio
+            id="audio"
+            controls
+        ></audio>
+
+        <div class="hint">
+            Ctrl+Enter or Cmd+Enter to speak
+        </div>
+
+    </div>
+</div>
+
+<script>
+const text = document.getElementById("text");
+const audio = document.getElementById("audio");
+const status = document.getElementById("status");
+const speakBtn = document.getElementById("speak");
+const stop = document.getElementById("stop");
+const save = document.getElementById("save");
+const clear = document.getElementById("clear");
+const voice = document.getElementById("voice");
+const speed = document.getElementById("speed");
+const speedValue = document.getElementById("speedValue");
+const charCount = document.getElementById("charCount");
+const langSelect = document.getElementById("lang");
+const langSetting = document.getElementById("langSetting");
+const sentencePause = document.getElementById("sentencePause");
+const clausePause = document.getElementById("clausePause");
+const sentencePauseValue = document.getElementById("sentencePauseValue");
+const clausePauseValue = document.getElementById("clausePauseValue");
+const pauseSetting = document.getElementById("pauseSetting");
+
+const VOICE_KEY = "kayockVoiceProfile";
+const SPEED_KEY = "kayockVoiceSpeed";
+const SENTENCE_KEY = "kayockVoiceSentencePause";
+const CLAUSE_KEY = "kayockVoiceClausePause";
+
+const PROFILE_LABELS = {
+    father_fox: "Adam",
+    eve: "Eve",
+    fenrir: "Fenrir",
+    onyx: "Onyx",
+    fable: "Fable",
+    daniel: "Daniel",
+    george: "George",
+    batman: "Batman",
+    optimus_prime: "Optimus Prime",
+    darth_vader: "Darth Vader",
+    iron_man: "Iron Man (RDJ)",
+    data: "Data",
+    picard: "Jean-Luc Picard",
+    federation_computer: "Federation Computer"
+};
+
+const LANG_GROUPS = [
+    ["English (US)", ["af_", "am_"], "en-us"],
+    ["English (UK)", ["bf_", "bm_"], "en-gb"],
+    ["Spanish", ["ef_", "em_"], "es"],
+    ["French", ["ff_"], "fr-fr"],
+    ["Hindi", ["hf_", "hm_"], "hi"],
+    ["Italian", ["if_", "im_"], "it"],
+    ["Japanese", ["jf_", "jm_"], "ja"],
+    ["Portuguese", ["pf_", "pm_"], "pt-br"],
+    ["Mandarin", ["zf_", "zm_"], "cmn"]
+];
+
+const PIPER_IDS = new Set(["data", "picard", "federation_computer"]);
+
+let latestBlob = null;
+let latestAudioUrl = null;
+
+function langForVoiceId(id) {
+    for (const [, prefixes, code] of LANG_GROUPS) {
+        if (prefixes.some(prefix => id.startsWith(prefix))) {
+            return code;
+        }
+    }
+    return "en-us";
+}
+
+function currentVoice() {
+    const option = voice.options[voice.selectedIndex];
+    if (!option) {
+        return {
+            profile: "father_fox",
+            name: "Adam",
+            code: "am_adam",
+            kind: "kokoro",
+            route: "profile"
+        };
+    }
+    return {
+        profile: option.value,
+        name: option.textContent.trim(),
+        code: option.dataset.code || option.value,
+        kind: option.dataset.kind || "kokoro",
+        route: option.dataset.route || "profile"
+    };
+}
+
+function currentSpeed() {
+    return Number(speed.value);
+}
+
+function updateSpeedLabel() {
+    speedValue.textContent = `${currentSpeed().toFixed(2)}×`;
+}
+
+function updatePauseLabels() {
+    sentencePauseValue.textContent = `${Number(sentencePause.value).toFixed(2)}s`;
+    clausePauseValue.textContent = `${Number(clausePause.value).toFixed(2)}s`;
+}
+
+function updateCharacterCount() {
+    const count = text.value.length;
+    charCount.textContent = `${count} character${count === 1 ? "" : "s"}`;
+}
+
+function kokoroControlsApply() {
+    return currentVoice().kind === "kokoro";
+}
+
+function syncEngineControls() {
+    const on = kokoroControlsApply();
+    langSelect.disabled = !on;
+    sentencePause.disabled = !on;
+    clausePause.disabled = !on;
+    langSetting.classList.toggle("is-off", !on);
+    pauseSetting.classList.toggle("is-off", !on);
+}
+
+function showReady() {
+    const v = currentVoice();
+    const langNote = v.kind === "kokoro"
+        ? (langSelect.value || langForVoiceId(v.code))
+        : v.kind;
+    status.textContent = `Ready • ${v.name} • ${v.code} • ${currentSpeed().toFixed(2)}× • ${langNote}`;
+}
+
+function addOption(group, value, label, code, kind, route) {
+    const option = document.createElement("option");
+    option.value = value;
+    option.textContent = label;
+    option.dataset.code = code;
+    option.dataset.kind = kind;
+    option.dataset.route = route;
+    group.appendChild(option);
+}
+
+function buildVoiceList(payload) {
+    const kokoro = new Set(payload.kokoro || []);
+    const profiles = payload.profiles || {};
+    const saved = voice.value || localStorage.getItem(VOICE_KEY) || "father_fox";
+    voice.innerHTML = "";
+
+    const named = document.createElement("optgroup");
+    named.label = "Profiles";
+    for (const key of ["father_fox", "eve", "fenrir", "onyx", "fable", "daniel", "george"]) {
+        const row = profiles[key];
+        if (!row) continue;
+        addOption(named, key, PROFILE_LABELS[key] || row.name || key, row.voice || key, "kokoro", "profile");
+    }
+    if (named.children.length) voice.appendChild(named);
+
+    const characters = document.createElement("optgroup");
+    characters.label = "Characters";
+    for (const key of Object.keys(profiles)) {
+        if (!profiles[key].special) continue;
+        addOption(
+            characters,
+            key,
+            PROFILE_LABELS[key] || profiles[key].name || key,
+            key,
+            "rvc",
+            "voice"
+        );
+    }
+    if (characters.children.length) voice.appendChild(characters);
+
+    const piper = document.createElement("optgroup");
+    piper.label = "Piper";
+    for (const key of Object.keys(profiles)) {
+        const row = profiles[key];
+        if (row.special) continue;
+        if (!PIPER_IDS.has(key) && !PIPER_IDS.has(row.voice)) continue;
+        addOption(piper, key, PROFILE_LABELS[key] || row.name || key, row.voice || key, "piper", "voice");
+    }
+    if (piper.children.length) voice.appendChild(piper);
+
+    const used = new Set();
+    for (const [label, prefixes] of LANG_GROUPS) {
+        const group = document.createElement("optgroup");
+        group.label = label;
+        const ids = [...kokoro].filter(id => prefixes.some(prefix => id.startsWith(prefix))).sort();
+        for (const id of ids) {
+            used.add(id);
+            addOption(group, id, id, id, "kokoro", "voice");
+        }
+        if (group.children.length) voice.appendChild(group);
+    }
+
+    const otherIds = [...kokoro].filter(id => !used.has(id)).sort();
+    if (otherIds.length) {
+        const group = document.createElement("optgroup");
+        group.label = "Kokoro";
+        for (const id of otherIds) {
+            addOption(group, id, id, id, "kokoro", "voice");
+        }
+        voice.appendChild(group);
+    }
+
+    if ([...voice.options].some(option => option.value === saved)) {
+        voice.value = saved;
+    }
+}
+
+function installFallbackSpecials() {
+    if (voice.querySelector('option[value="batman"]')) return;
+    const group = document.createElement("optgroup");
+    group.label = "Special Voices";
+    const rows = [
+        ["batman", "Batman", "rvc"],
+        ["optimus_prime", "Optimus Prime", "rvc"],
+        ["darth_vader", "Darth Vader", "rvc"],
+        ["iron_man", "Iron Man (RDJ)", "rvc"],
+        ["data", "Data", "piper"],
+        ["picard", "Jean-Luc Picard", "piper"],
+        ["federation_computer", "Federation Computer", "piper"]
+    ];
+    for (const [value, label, kind] of rows) {
+        addOption(group, value, label, value, kind, "voice");
+    }
+    voice.appendChild(group);
+}
+
+async function loadVoiceLibrary() {
+    try {
+        const response = await fetch("/voices");
+        if (!response.ok) throw new Error(await response.text());
+        buildVoiceList(await response.json());
+    } catch (err) {
+        console.error(err);
+        installFallbackSpecials();
+        const saved = localStorage.getItem(VOICE_KEY);
+        if (saved && [...voice.options].some(option => option.value === saved)) {
+            voice.value = saved;
+        }
+    }
+    syncEngineControls();
+    showReady();
+}
+
+const savedSpeed = Number(localStorage.getItem(SPEED_KEY));
+if (Number.isFinite(savedSpeed) && savedSpeed >= 0.5 && savedSpeed <= 2) {
+    speed.value = savedSpeed.toFixed(2);
+}
+
+const savedSentenceRaw = localStorage.getItem(SENTENCE_KEY);
+const savedSentence = savedSentenceRaw === null ? NaN : Number(savedSentenceRaw);
+if (Number.isFinite(savedSentence) && savedSentence >= 0 && savedSentence <= 2) {
+    sentencePause.value = savedSentence.toFixed(2);
+}
+
+const savedClauseRaw = localStorage.getItem(CLAUSE_KEY);
+const savedClause = savedClauseRaw === null ? NaN : Number(savedClauseRaw);
+if (Number.isFinite(savedClause) && savedClause >= 0 && savedClause <= 2) {
+    clausePause.value = savedClause.toFixed(2);
+}
+
+updateSpeedLabel();
+updatePauseLabels();
+updateCharacterCount();
+syncEngineControls();
+showReady();
+loadVoiceLibrary();
+
+voice.addEventListener("change", () => {
+    localStorage.setItem(VOICE_KEY, voice.value);
+    syncEngineControls();
+    showReady();
+});
+
+speed.addEventListener("input", () => {
+    updateSpeedLabel();
+    localStorage.setItem(SPEED_KEY, speed.value);
+    showReady();
+});
+
+langSelect.addEventListener("change", showReady);
+
+sentencePause.addEventListener("input", () => {
+    updatePauseLabels();
+    localStorage.setItem(SENTENCE_KEY, sentencePause.value);
+});
+
+clausePause.addEventListener("input", () => {
+    updatePauseLabels();
+    localStorage.setItem(CLAUSE_KEY, clausePause.value);
+});
+
+text.addEventListener("input", updateCharacterCount);
+
+async function generateSpeech() {
+    const value = text.value.trim();
+    if (!value) {
+        status.textContent = "Type something first.";
+        text.focus();
+        return;
+    }
+
+    const v = currentVoice();
+    const selectedSpeed = currentSpeed();
+    const body = {
+        text: value,
+        speed: selectedSpeed
+    };
+
+    if (v.route === "voice") body.voice = v.profile;
+    else body.profile = v.profile;
+
+    if (v.kind === "kokoro") {
+        if (langSelect.value) body.lang = langSelect.value;
+        const sentence = Number(sentencePause.value);
+        const clause = Number(clausePause.value);
+        if (Math.abs(sentence - 0.25) > 0.001) body.sentence_pause = sentence;
+        if (Math.abs(clause - 0.1) > 0.001) body.clause_pause = clause;
+    }
+
+    speakBtn.disabled = true;
+    status.textContent = `${v.name} is speaking...`;
+
+    try {
+        const response = await fetch("/speak", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body)
+        });
+        if (!response.ok) throw new Error(await response.text());
+
+        latestBlob = await response.blob();
+        if (latestAudioUrl) URL.revokeObjectURL(latestAudioUrl);
+        latestAudioUrl = URL.createObjectURL(latestBlob);
+        audio.src = latestAudioUrl;
+        save.disabled = false;
+        await audio.play();
+        status.textContent = `Playing • ${v.name} • ${v.code} • ${selectedSpeed.toFixed(2)}×`;
+    } catch (err) {
+        console.error(err);
+        status.textContent = `${v.name} voice generation failed.`;
+    } finally {
+        speakBtn.disabled = false;
+    }
+}
+
+speakBtn.addEventListener("click", generateSpeech);
+
+stop.addEventListener("click", () => {
+    audio.pause();
+    audio.currentTime = 0;
+    status.textContent = `Stopped • ${currentVoice().name}`;
+});
+
+save.addEventListener("click", () => {
+    if (!latestBlob) return;
+    const v = currentVoice();
+    const stamp = new Date().toISOString().replace(/[:.]/g, "-");
+    const link = document.createElement("a");
+    const downloadUrl = URL.createObjectURL(latestBlob);
+    link.href = downloadUrl;
+    link.download = `kayock-${v.name.toLowerCase().replace(/\s+/g, "-")}-${stamp}.wav`;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(downloadUrl), 1000);
+});
+
+clear.addEventListener("click", () => {
+    text.value = "";
+    updateCharacterCount();
+    text.focus();
+    showReady();
+});
+
+text.addEventListener("keydown", event => {
+    if (event.key === "Enter" && (event.ctrlKey || event.metaKey)) {
+        event.preventDefault();
+        generateSpeech();
+    }
+});
+</script>
+
+</body>
+</html>

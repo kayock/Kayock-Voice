@@ -1,0 +1,59 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.python-version.local
+
+# Models, weights, indexes (download separately; do not commit)
+*.onnx
+*.bin
+*.pth
+*.pt
+*.index
+*.zip
+models/
+rvc-models/
+kokoro-v1.0.onnx
+voices-v1.0.bin
+
+# Audio / recordings / caches
+*.wav
+*.mp3
+*.flac
+*.ogg
+*.opus
+*.m4a
+*.pcm
+cache/
+.cache/
+tmp/
+temp/
+generated/
+recordings/
+
+# TLS / secrets / machine-local
+*.key
+*.crt
+*.pem
+*.p12
+.env
+.env.*
+!.env.example
+secrets/
+certs/
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Runtime / local deploy mirrors
+backups/
+logs/
+.ruff_cache/
+.pytest_cache/
+.mypy_cache/
+uv.lock.local

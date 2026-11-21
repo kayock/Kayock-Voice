@@ -1,0 +1,5 @@
+# Adapter runs under the same FastAPI/uvicorn environment as Kayock Voice on Portable.
+# System dependency: ffmpeg on PATH.
+fastapi==0.141.1
+uvicorn==0.52.4
+pydantic==2.13.4

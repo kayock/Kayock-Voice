@@ -1,0 +1,8 @@
+# Pinned to versions observed on Ubuntu Portable Kayock Voice (kokoro venv), 2026-11-20.
+fastapi==0.141.1
+uvicorn==0.52.4
+kokoro-onnx==0.6.1
+soundfile==0.14.0
+numpy==2.5.2
+onnxruntime==1.29.0
+pydantic==2.13.4

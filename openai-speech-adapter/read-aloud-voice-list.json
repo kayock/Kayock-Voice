@@ -1,0 +1,296 @@
+[
+  {
+    "voice": "picard",
+    "langs": [
+      "en-US"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "data",
+    "langs": [
+      "en-US"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "federation_computer",
+    "langs": [
+      "en-US"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "darth_vader",
+    "langs": [
+      "en-US"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "batman",
+    "langs": [
+      "en-US"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "optimus_prime",
+    "langs": [
+      "en-US"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "iron_man",
+    "langs": [
+      "en-US"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "am_adam",
+    "langs": [
+      "en-US"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "af_heart",
+    "langs": [
+      "en-US"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "am_fenrir",
+    "langs": [
+      "en-US"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "am_onyx",
+    "langs": [
+      "en-US"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "bm_fable",
+    "langs": [
+      "en-GB"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "bm_daniel",
+    "langs": [
+      "en-GB"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "bm_george",
+    "langs": [
+      "en-GB"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "father_fox",
+    "langs": [
+      "en-US"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "eve",
+    "langs": [
+      "en-US"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "fenrir",
+    "langs": [
+      "en-US"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "onyx",
+    "langs": [
+      "en-US"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "fable",
+    "langs": [
+      "en-GB"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "daniel",
+    "langs": [
+      "en-GB"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "george",
+    "langs": [
+      "en-GB"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "af_alloy",
+    "langs": [
+      "en-US"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "af_aoede",
+    "langs": [
+      "en-US"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "af_bella",
+    "langs": [
+      "en-US"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "af_jessica",
+    "langs": [
+      "en-US"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "af_kore",
+    "langs": [
+      "en-US"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "af_nicole",
+    "langs": [
+      "en-US"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "af_nova",
+    "langs": [
+      "en-US"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "af_river",
+    "langs": [
+      "en-US"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "af_sarah",
+    "langs": [
+      "en-US"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "af_sky",
+    "langs": [
+      "en-US"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "am_echo",
+    "langs": [
+      "en-US"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "am_eric",
+    "langs": [
+      "en-US"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "am_liam",
+    "langs": [
+      "en-US"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "am_michael",
+    "langs": [
+      "en-US"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "am_puck",
+    "langs": [
+      "en-US"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "am_santa",
+    "langs": [
+      "en-US"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "bf_alice",
+    "langs": [
+      "en-GB"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "bf_emma",
+    "langs": [
+      "en-GB"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "bf_isabella",
+    "langs": [
+      "en-GB"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "bf_lily",
+    "langs": [
+      "en-GB"
+    ],
+    "model": "tts-1"
+  },
+  {
+    "voice": "bm_lewis",
+    "langs": [
+      "en-GB"
+    ],
+    "model": "tts-1"
+  }
+]

@@ -1,0 +1,37 @@
+{
+  "base": {
+    "engine": "kokoro",
+    "profile": "father_fox",
+    "voice": "am_adam",
+    "speed": 0.92
+  },
+  "conversion_defaults": {
+    "f0_method": "rmvpe",
+    "pitch": 0,
+    "index_rate": 0.75,
+    "rms_mix_rate": 1.0,
+    "protect": 0.33
+  },
+  "voices": {
+    "batman": {
+      "display_name": "Batman",
+      "model": "/opt/kayock-voice/rvc-models/batman/batman.pth",
+      "index": "/opt/kayock-voice/rvc-models/batman/batman.index"
+    },
+    "optimus_prime": {
+      "display_name": "Optimus Prime",
+      "model": "/opt/kayock-voice/rvc-models/optimus/extracted/model.pth",
+      "index": "/opt/kayock-voice/rvc-models/optimus/extracted/model.index"
+    },
+    "darth_vader": {
+      "display_name": "Darth Vader",
+      "model": "/opt/kayock-voice/rvc-models/vader/extracted/vader.pth",
+      "index": "/opt/kayock-voice/rvc-models/vader/extracted/added_IVF931_Flat_nprobe_1_v2.index"
+    },
+    "iron_man": {
+      "display_name": "Iron Man (RDJ)",
+      "model": "/opt/kayock-voice/rvc-models/iron_man/iron_man.pth",
+      "index": "/opt/kayock-voice/rvc-models/iron_man/iron_man.index"
+    }
+  }
+}

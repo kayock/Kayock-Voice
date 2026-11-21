@@ -1,0 +1,79 @@
+{
+  "father_fox": {
+    "voice": "am_adam",
+    "speed": 0.92
+  },
+  "eve": {
+    "voice": "af_heart",
+    "speed": 0.92
+  },
+  "fenrir": {
+    "voice": "am_fenrir",
+    "speed": 0.92
+  },
+  "onyx": {
+    "voice": "am_onyx",
+    "speed": 0.92
+  },
+  "fable": {
+    "voice": "bm_fable",
+    "speed": 0.92
+  },
+  "daniel": {
+    "voice": "bm_daniel",
+    "speed": 0.92
+  },
+  "george": {
+    "voice": "bm_george",
+    "speed": 0.92
+  },
+  "batman": {
+    "voice": "am_adam",
+    "speed": 0.92,
+    "rvc_key": "batman",
+    "name": "Batman",
+    "display_name": "Batman"
+  },
+  "optimus_prime": {
+    "voice": "am_adam",
+    "speed": 0.92,
+    "rvc_key": "optimus_prime",
+    "name": "Optimus Prime",
+    "display_name": "Optimus Prime"
+  },
+  "darth_vader": {
+    "voice": "am_adam",
+    "speed": 0.92,
+    "rvc_key": "darth_vader",
+    "name": "Darth Vader",
+    "display_name": "Darth Vader"
+  },
+  "iron_man": {
+    "voice": "am_adam",
+    "speed": 0.92,
+    "rvc_key": "iron_man",
+    "name": "Iron Man (RDJ)",
+    "display_name": "Iron Man (RDJ)"
+  },
+  "data": {
+    "voice": "data",
+    "speed": 1.0,
+    "engine": "piper",
+    "name": "Data",
+    "display_name": "Data"
+  },
+  "picard": {
+    "voice": "picard",
+    "speed": 1.0,
+    "engine": "piper",
+    "name": "Jean-Luc Picard",
+    "display_name": "Jean-Luc Picard"
+  },
+  "federation_computer": {
+    "voice": "federation_computer",
+    "speed": 1.0,
+    "engine": "piper",
+    "name": "Federation Computer",
+    "display_name": "Federation Computer"
+  }
+}
